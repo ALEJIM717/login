@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Registro | Alexa</title>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #f9d5ec, #fef6fb);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+
+    .login-container {
+      background: #fff;
+      padding: 45px;
+      border-radius: 20px;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+      width: 340px;
+      text-align: center;
+    }
+
+    .login-container img.logo {
+      height: 40px;
+      margin-bottom: 15px;
+    }
+
+    .login-container h2 {
+      color: #d65d9e;
+      margin-bottom: 20px;
+    }
+
+    .input-group {
+      margin-bottom: 20px;
+      position: relative;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="password"] {
+      width: 100%;
+      padding: 12px 5px 12px 12px;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      font-size: 14px;
+    }
+
+    .toggle-password {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      cursor: pointer;
+      color: #999;
+    }
+
+    .btn-login {
+      background: #d65d9e;
+      color: #fff;
+      border: none;
+      border-radius: 10px;
+      padding: 12px;
+      width: 100%;
+      font-weight: bold;
+      cursor: pointer;
+      font-size: 15px;
+      transition: background 0.3s;
+    }
+
+    .btn-login:hover {
+      background: #c7438b;
+    }
+
+    small {
+      display: block;
+      margin-top: 15px;
+      color: #999;
+    }
+
+    a {
+      color: #d65d9e;
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <div class="login-container">
+    <!-- Logo -->
+    <img src="img/logo.jpg" alt="Alexa Isabel" class="logo">
+
+    <h2>Crear una cuenta</h2>
+    <form id="registroForm">
+      <div class="input-group">
+        <input type="text" id="nombre" placeholder="Nombre completo" required>
+      </div>
+      <div class="input-group">
+        <input type="email" id="correo" placeholder="Correo electrónico" required>
+      </div>
+      <div class="input-group">
+        <input type="password" id="password" placeholder="Contraseña" required>
+        <span class="toggle-password" onclick="togglePassword('password')">👁️</span>
+      </div>
+      <div class="input-group">
+        <input type="password" id="confirmar" placeholder="Confirmar contraseña" required>
+        <span class="toggle-password" onclick="togglePassword('confirmar')">👁️</span>
+      </div>
+      <button type="submit" class="btn-login">Registrarse</button>
+    </form>
+    <small>¿Ya tienes cuenta? <a href="login.html">Inicia sesión</a></small>
+  </div>
+
+  <script>
+    function togglePassword(idCampo) {
+      const campo = document.getElementById(idCampo);
+      campo.type = campo.type === "password" ? "text" : "password";
+    }
+
+    document.getElementById("registroForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+
+      const nombre = document.getElementById("nombre").value.trim();
+      const correo = document.getElementById("correo").value.trim();
+      const pass = document.getElementById("password").value.trim();
+      const confirmar = document.getElementById("confirmar").value.trim();
+
+      if (nombre === "" || correo === "" || pass === "" || confirmar === "") {
+        Swal.fire({
+          icon: 'error',
+          title: 'Campos vacíos',
+          text: 'Por favor llena todos los campos.'
+        });
+        return;
+      }
+
+      if (!validarCorreo(correo)) {
+        Swal.fire({
+          icon: 'error',
+          title: 'Correo inválido',
+          text: 'Ingresa un correo electrónico válido.'
+        });
+        return;
+      }
+
+      if (pass.length < 6) {
+        Swal.fire({
+          icon: 'error',
+          title: 'Contraseña muy corta',
+          text: 'Debe tener al menos 6 caracteres.'
+        });
+        return;
+      }
+
+      if (pass !== confirmar) {
+        Swal.fire({
+          icon: 'error',
+          title: 'Contraseñas no coinciden',
+          text: 'Ambas contraseñas deben ser iguales.'
+        });
+        return;
+      }
+
+      Swal.fire({
+        icon: 'success',
+        title: '¡Registro exitoso!',
+        text: 'Redirigiendo...',
+        showConfirmButton: false,
+        timer: 1500
+      }).then(() => {
+        window.location.href = "login.html";
+      });
+    });
+
+    function validarCorreo(correo) {
+      const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      return regex.test(correo);
+    }
+  </script>
+</body>
+</html>
