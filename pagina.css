@@ -1,0 +1,87 @@
+:root {
+  --primary-color: #fa74b7; /* Rosa principal */
+  --secondary-color: #ff99cc; /* Rosa claro */
+  --dark-color: #333;
+  --light-color: #f8f9fa;
+}
+
+/* Estilos generales */
+body {
+  font-family: 'Arial', sans-serif;
+  color: var(--dark-color);
+  padding-top: 72px;
+}
+
+/* Navbar */
+.bg-pink {
+  background-color: var(--primary-color);
+}
+
+.navbar-light .navbar-nav .nav-link {
+  color: rgba(0, 0, 0, 0.8);
+}
+
+.navbar-light .navbar-nav .nav-link:hover {
+  color: rgba(0, 0, 0, 1);
+}
+
+/* Hero Section */
+.hero-section {
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('img/maquillaje.jpg');
+  background-size: cover;
+  background-position: center;
+  height: 70vh;
+  color: white;
+}
+
+/* Perfil */
+.profile-img {
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+  border: 5px solid var(--primary-color);
+}
+
+/* Botones */
+.btn-pink {
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+}
+
+.btn-pink:hover {
+  background-color: #e55ca0;
+  color: white;
+}
+
+.btn-outline-pink {
+  border-color: var(--primary-color);
+  color: var(--primary-color);
+}
+
+.btn-outline-pink:hover {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+/* Tarjetas */
+.card {
+  transition: transform 0.3s;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .hero-section {
+    height: 50vh;
+  }
+ 
+  .profile-img {
+    width: 150px;
+    height: 150px;
+    margin-bottom: 20px;
+  }
+}
